@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SignOut = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -8,7 +8,7 @@ const SignOut = () => {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,15 +24,16 @@ const SignOut = () => {
       console.log(data);
       if (data.success === false) {
         setLoading(false);
-        setError(data.message);
+        setError("Wrong Credentials");
         return;
       }
       setLoading(false);
       setError(null);
+      navigate('/sign-in');
     } catch (err) {
       console.log(err);
       setLoading(false);
-      setError(`Something went wrong: ${err.message}`);
+      setError(`Something went wrong`);
 
     }
   };
