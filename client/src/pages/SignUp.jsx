@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 const SignOut = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -13,8 +14,8 @@ const SignOut = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -29,12 +30,11 @@ const SignOut = () => {
       }
       setLoading(false);
       setError(null);
-      navigate('/sign-in');
+      navigate("/sign-in");
     } catch (err) {
       console.log(err);
       setLoading(false);
       setError(`Something went wrong`);
-
     }
   };
 
@@ -73,10 +73,11 @@ const SignOut = () => {
         >
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5">
         <p>Have an Account?</p>
-        <Link to="/signin" className="text-slate-700 hover:underline">
+        <Link to="/sign-in" className="text-slate-700 hover:underline">
           Sign In
         </Link>
       </div>
