@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(cookieParser());
 dotenv.config();
 
-mongoose.connect(`${process.env.MONGO_URI}`)
+
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   console.log("Connected to MongoDB");
 })
 .catch((err) => {
   console.log(err);
 });
-
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
 });
